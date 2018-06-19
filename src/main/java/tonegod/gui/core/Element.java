@@ -420,14 +420,14 @@ public class Element extends Node {
 	 */
 	public void removeAllChildren() {
 		for (Element e : elementChildren.values()) {
-			e.removeFromParent();
-			e.removeClippingLayer(this);
-			for (ClippingDefine def : clippingLayers)
-				e.removeClippingLayer(def.getElement());
-		}
+                                e.removeFromParent();
+                                e.removeClippingLayer(this);
+                                for (ClippingDefine def : clippingLayers)
+                                        e.removeClippingLayer(def.getElement());
+                        }
 		elementChildren.clear();
 	}
-	
+        
 	/**
 	 * Returns the child elements as a Map
 	 * @return the pre-existing map
@@ -1143,14 +1143,16 @@ public class Element extends Node {
 	/**
 	 * Forces the object to stay within the constraints of it's parent Elements
 	 * dimensions.
-	 * NOTE: use setLockToParentBounds instead.
 	 * 
 	 * @param lockToParentBounds boolean
+         * @deprecated use {@link setLockToParentBounds(boolean lockToParentBounds)} instead
 	 */
 	@Deprecated
 	public void setlockToParentBounds(boolean lockToParentBounds) {
 		this.lockToParentBounds = lockToParentBounds;
-	}/**
+	}
+        
+        /**
 	 * Forces the object to stay within the constraints of it's parent Elements
 	 * dimensions.
 	 * 
@@ -1390,7 +1392,7 @@ public class Element extends Node {
 	 */
 	public void setMinDimensions(Vector2f minDimensions) {
 		if (this.minDimensions == null) this.minDimensions = new Vector2f();
-		this.minDimensions.set(minDimensions);
+                    this.minDimensions.set(minDimensions);
 	}
 	
 	public Vector2f getMinDimensions() { return this.minDimensions; }
@@ -1923,10 +1925,10 @@ public class Element extends Node {
 	public void setFont(String fontPath) {
 		font = app.getAssetManager().loadFont(fontPath);
 		if (textElement != null) {
-			String text = this.getText();
+			String txt = this.getText();
 			textElement.removeFromParent();
 			textElement = null;
-			setText(text);
+			setText(txt);
 		}
 	}
 	
@@ -2113,8 +2115,8 @@ public class Element extends Node {
 		if (textElement == null) {
 			textElement = new BitmapText(font, false);
 			textElement.setBox(new Rectangle(0,0,dimensions.x,dimensions.y));
-		//	textElement = new TextElement(screen, Vector2f.ZERO, getDimensions());
-		}
+//			textElement = new TextElement(screen, Vector2f.ZERO, getDimensions());
+                            }
 		textElement.setLineWrapMode(textWrap);
 		textElement.setAlignment(textAlign);
 		textElement.setVerticalAlignment(textVAlign);
@@ -2575,7 +2577,7 @@ public class Element extends Node {
 	}
 	
 	/**
-	 * Recursive call for properly showing children of the Element.  I'm thinking this
+	 * Recursive call for properly showing children of the Element.  I'm thinking
 	 * this needs to be a private method, however I need to verify this before I
 	 * update it.
 	 */
@@ -2647,6 +2649,37 @@ public class Element extends Node {
 		}
 	}
 	
+	/**
+	 * For internal use.  This method should never be called directly.
+         * @param elements childs to exclude from
+	 */
+	public void childHide(Element... elements) {
+		if (isVisible) {
+			this.wasVisible = isVisible;
+			this.isVisible = false;
+			this.isClipped = true;
+			
+			if (screen.getUseToolTips())
+				if (screen.getToolTipFocus() == this)
+					screen.hideToolTip();
+		}
+	//	updateClipping();
+		updateClippingLayers();
+		controlHideHook();
+                
+                boolean hide = true;
+		for (Element el : elementChildren.values()) {
+                        for (Element childEl : elements) {
+                            if(childEl.getUID().equals(el.getUID())) {
+                                hide = false;
+                                break;
+                            }
+                        }
+                        if (hide)
+                            el.childHide();
+		}
+	}
+        
 	/**
 	 * For internal use.  This method should never be called directly.
 	 */

@@ -19,7 +19,9 @@ import tonegod.gui.core.utils.UIDUtil;
 /**
  *
  * @author t0neg0d
+ * @deprecated use {@link Window} instead
  */
+@Deprecated
 public class WindowExt extends Element {
 	protected Element dragBar;
 	protected LabelElement dragBarTitle;

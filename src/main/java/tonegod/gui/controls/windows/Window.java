@@ -239,49 +239,81 @@ public class Window extends Element {
 	/**
 	 * Sets the Window title text
 	 * @param title String
+         * @deprecated Use {@link setTitle(String title)} instead
 	 */
+        @Deprecated
 	public void setWindowTitle(String title) {
+		setTitle(title);
+	}
+        
+        /**
+	 * Sets the Window title text
+	 * @param title String
+	 */
+	public void setTitle(String title) {
 		dragBar.setText(title);
 	}
 	
-	/**
+        /**
 	 * Shows the window using the default Show Effect
+         * @deprecated Use {@link show()} instead
 	 */
+        @Deprecated
 	public void showWindow() {
+            showWithEffect();
+        }
+        
+        /**
+         * Shows the window using the default Show Effect
+         */
+        @Override
+	public void showWithEffect() {
 		Effect effect = getEffect(Effect.EffectEvent.Show);
 		if (effect != null) {
 			if (useShowSound && screen.getUseUIAudio()) {
 				effect.setAudioFile(showSound);
 				effect.setAudioVolume(showSoundVolume);
 			}
-			if (effect.getEffectType() == Effect.EffectType.FadeIn) {
-				Effect clone = effect.clone();
-				clone.setAudioFile(null);
-				this.propagateEffect(clone, false);
-			} else
-				screen.getEffectManager().applyEffect(effect);
+                        super.showWithEffect();
+//			if (effect.getEffectType() == Effect.EffectType.FadeIn) {
+//				Effect clone = effect.clone();
+//				clone.setAudioFile(null);
+//				this.propagateEffect(clone, false);
+//			} else
+//				screen.getEffectManager().applyEffect(effect);
 		} else
-			this.show();
+			super.show();
 	}
 	
 	/**
 	 * Hides the Window using the default Hide Effect
+         * @deprecated Use {@link hide()} instead
 	 */
+        @Deprecated
 	public void hideWindow() {
+            hideWithEffect();
+        }
+        
+	/**
+	 * Hides the Window using the default Hide Effect
+	 */
+        @Override
+	public void hideWithEffect() {
 		Effect effect = getEffect(Effect.EffectEvent.Hide);
 		if (effect != null) {
 			if (useHideSound && screen.getUseUIAudio()) {
 				effect.setAudioFile(hideSound);
 				effect.setAudioVolume(hideSoundVolume);
 			}
-			if (effect.getEffectType() == Effect.EffectType.FadeOut) {
-				Effect clone = effect.clone();
-				clone.setAudioFile(null);
-				this.propagateEffect(clone, true);
-			} else
-				screen.getEffectManager().applyEffect(effect);
+                        super.hideWithEffect();
+//			if (effect.getEffectType() == Effect.EffectType.FadeOut) {
+//				Effect clone = effect.clone();
+//				clone.setAudioFile(null);
+//				this.propagateEffect(clone, true);
+//			} else
+//				screen.getEffectManager().applyEffect(effect);
 		} else
-			this.hide();
+			hide();
 	}
 	
 	/**
@@ -359,4 +391,84 @@ public class Window extends Element {
 		dragBar.setY(dbIndents.y+contentArea.getHeight());
 		dragBar.setWidth(getWidth()-(dbIndents.x+dbIndents.z));
 	}
+
+        @Override
+        public void setToolTipText(String toolTip) {
+            contentArea.setToolTipText(toolTip); 
+        }
+
+        @Override
+        public void setTextClipPadding(Vector4f textClipPadding) {
+            contentArea.setTextClipPadding(textClipPadding);
+        }
+
+        @Override
+        public void setTextClipPadding(float clipLeft, float clipRight, float clipTop, float clipBottom) {
+            contentArea.setTextClipPadding(clipLeft, clipRight, clipTop, clipBottom);
+        }
+
+        @Override
+        public void setTextClipPadding(float textClipPadding) {
+            contentArea.setTextClipPadding(textClipPadding);
+        }
+
+        @Override
+        public void setTextClipPaddingByKey(String style, String key) {
+            contentArea.setTextClipPaddingByKey(style, key);
+        }
+
+        @Override
+        public void setTextPaddingByKey(String style, String key) {
+            contentArea.setTextPaddingByKey(style, key);
+        }
+
+        @Override
+        public void setText(String text) {
+            contentArea.setText(text);
+        }
+
+        @Override
+        public void setTextPadding(Vector4f textPadding) {
+            contentArea.setTextPadding(textPadding);
+        }
+
+        @Override
+        public void setTextPadding(float left, float right, float top, float bottom) {
+            contentArea.setTextPadding(left, right, top, bottom);
+        }
+
+        @Override
+        public void setTextPadding(float textPadding) {
+            contentArea.setTextPadding(textPadding);
+        }
+
+        @Override
+        public void setTextPosition(float x, float y) {
+            contentArea.setTextPosition(x, y);
+        }
+
+        @Override
+        public void setTextWrap(LineWrapMode textWrap) {
+            contentArea.setTextWrap(textWrap);
+        }
+
+        @Override
+        public void setTextVAlign(BitmapFont.VAlign textVAlign) {
+            contentArea.setTextVAlign(textVAlign);
+        }
+
+        @Override
+        public void setTextAlign(BitmapFont.Align textAlign) {
+            contentArea.setTextAlign(textAlign);
+        }
+
+        @Override
+        public void sizeToContent() {
+            contentArea.sizeToContent();
+        }
+
+        public void setTitleTextAlign(BitmapFont.Align textAlign) {
+            dragBar.setTextAlign(textAlign);
+        }
+        
 }
