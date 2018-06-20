@@ -3,7 +3,7 @@ apply plugin: 'maven'
 
 description = 'Tonegod\'s graphical user-interface library for jMonkeyEngine'
 group = 'tonegod'
-version = '0.1.0'
+version = '0.1.1'
 
 //sourceCompatibility = 1.7
 sourceCompatibility = 1.8
@@ -45,7 +45,7 @@ task pom {
                     }
                 }
             }
-        }.writeTo("${buildDir}/libs/tonegodgui-0.1.0.pom")
+        }.writeTo("${buildDir}/libs/tonegodgui-${version}.pom")
     }
 }
 build { dependsOn 'pom' }

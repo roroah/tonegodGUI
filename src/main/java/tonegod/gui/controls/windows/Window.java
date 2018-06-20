@@ -239,7 +239,7 @@ public class Window extends Element {
 	/**
 	 * Sets the Window title text
 	 * @param title String
-         * @deprecated Use {@link setTitle(String title)} instead
+         * @deprecated Use {@link #setTitle(String title)} instead
 	 */
         @Deprecated
 	public void setWindowTitle(String title) {
@@ -256,7 +256,7 @@ public class Window extends Element {
 	
         /**
 	 * Shows the window using the default Show Effect
-         * @deprecated Use {@link show()} instead
+         * @deprecated Use {@link #show()} instead
 	 */
         @Deprecated
 	public void showWindow() {
@@ -287,7 +287,7 @@ public class Window extends Element {
 	
 	/**
 	 * Hides the Window using the default Hide Effect
-         * @deprecated Use {@link hide()} instead
+         * @deprecated Use {@link #hide()} instead
 	 */
         @Deprecated
 	public void hideWindow() {

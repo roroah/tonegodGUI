@@ -1145,7 +1145,7 @@ public class Element extends Node {
 	 * dimensions.
 	 * 
 	 * @param lockToParentBounds boolean
-         * @deprecated use {@link setLockToParentBounds(boolean lockToParentBounds)} instead
+         * @deprecated use {@link #setLockToParentBounds(boolean lockToParentBounds)} instead
 	 */
 	@Deprecated
 	public void setlockToParentBounds(boolean lockToParentBounds) {
