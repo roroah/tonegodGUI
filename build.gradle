@@ -8,14 +8,19 @@ version = '0.1.0'
 //sourceCompatibility = 1.7
 sourceCompatibility = 1.8
 
+ext {
+		appName = 'tonegodgui'
+		jmonkeyengine_version = 'v3.2.1-stable'
+}
+
 repositories {
     //maven { url 'https://dl.bintray.com/jmonkeyengine/com.jme3' }
-    maven { url "https://jcenter.bintray.com" }
+//    maven { url "https://jcenter.bintray.com" }
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
-    //compile "com.jme3:jme3-core:3.0.10"
-    compile "org.jmonkeyengine:jme3-core:3.1.0-stable"
+    compile "com.github.jMonkeyEngine.jMonkeyEngine:jme3-core:$jmonkeyengine_version"
 }
 
 // custom tasks for creating source/javadoc jars
